@@ -1,5 +1,66 @@
-	marble foo_example
+marble foo_example
+{
+	source a:     +--A-B--C-#
+	operator foo: +--1-2--3-|
+}
+
+marble multichar
+{
+	source foo: +-(A1)-(A2)-(abc)-(A4)->	
+}
+
+marble three
+{
+	source foo: +-A--B-C----D--E->	
+	source bar: +-123->	
+	source dog: +a-b-c-d->	
+}
+
+	marble endings
 	{
-		source a:     +--A-B--C-#
-		operator foo: +--1-2--3-|
+		source foo: +--->		// this one with no spcific end
+		source bar: +---|		// this one ending with completion
+		source dog: +---#		// this one ending with error
+	}
+
+marble confusion
+{
+	source a: +-a-b-c-d-e-|
+	source b: +-(Aa)-(Ab)-(Ac)-(Ad)-(Ae)-|
+}
+
+	marble paddings
+	{
+		source foo: +-1-2-|
+		source bar: ...+-3-4-|
+		source dog: .....+-5-6-|
+	}
+
+
+marble no_confusion
+{
+	source a: +-a   -b   -c   -d   -e   -|
+	source b: +-(Aa)-(Ab)-(Ac)-(Ad)-(Ae)-|
+}
+
+	marble exampleOperator
+	{
+		source foo: 				+-1-2-3-|
+		operator myTransformation: 	+-A-B-C-|
+	}
+	
+	marble nested
+	{
+		source a:
+				{
+					+-a-b-c-|				// first inner timeline
+					.....+-x-y-z-|			// second inner timeline
+					...........+-1-2-3-|	// third inner timeline
+				}	
+	}
+	
+	
+	marble groupped
+	{
+		source foo:		+-{1,2}-{3,4,5}-{6,7}-|
 	}

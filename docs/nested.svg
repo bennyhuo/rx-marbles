@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="385.0px"
-   height="182.0px"
-   viewBox="0 0 550.0 260.0 "
+   width="724.693326287px"
+   height="126.561178901px"
+   viewBox="0 0 1035.27618041 180.801684144 "
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -68,90 +68,124 @@
     </marker>    
 
   </defs>
-    <g id="source_a" transform="rotate(0 0.0 30) translate(0.0,30)">
+    <g id="skew" transform="translate(0 30)">
   <path 
      style="fill:none;fill-rule:evenodd;stroke:#003080;stroke-width:2px;marker-end:url(#Arrow1Lend)"
-     d="m 0,0 547.0,0"
+     d="m 0,0 747.0,0"
+     inkscape:connector-curvature="0" />
+</g><g id="source_a" transform="rotate(15 0.0 30) translate(0.0,30)">
+  <path 
+     style="fill:none;fill-rule:evenodd;stroke:#003080;stroke-width:2px;marker-end:url(#Arrow1Lend)"
+     d="m 0,0 459.346663144,0"
      inkscape:connector-curvature="0" />
 
 <g style="filter:url(#filter3443)">
   <circle
      r="22"
      cy="0"
-     cx="125.0"
+     cx="76.7638090205"
      style="opacity:1;fill:#f08080;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="7"
-     x="125.0"
+     x="76.7638090205"
      style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
-     xml:space="preserve">A</text>
+     xml:space="preserve">a</text>
 </g>
 
 <g style="filter:url(#filter3443)">
   <circle
      r="22"
      cy="0"
-     cx="225.0"
+     cx="180.291427062"
      style="opacity:1;fill:#f39c12;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="7"
-     x="225.0"
+     x="180.291427062"
      style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
-     xml:space="preserve">B</text>
+     xml:space="preserve">b</text>
 </g>
 
 <g style="filter:url(#filter3443)">
   <circle
      r="22"
      cy="0"
-     cx="375.0"
+     cx="283.819045103"
      style="opacity:1;fill:#ecf0f1;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="7"
-     x="375.0"
+     x="283.819045103"
      style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
-     xml:space="preserve">C</text>
+     xml:space="preserve">c</text>
 </g>
 
-<g id="error">
-    <path
-       inkscape:connector-curvature="0"
-       d="m 489.0,-18 -28,36"
-       style="stroke:#F00000;stroke-width:3px;" />
-    <path
-       style="stroke:#F00000;stroke-width:3px;"
-       d="m 461.0,-18 28,36"
-       />
+<g>
+   <path d="m 387.346663144,-12 0,24"
+       style="fill:none;fill-rule:evenodd;stroke:#003080;stroke-width:4px;" />
 </g>
-</g><g transform="translate(0 90.0)">
-<g style="filter:url(#filter3443)">
-  <rect
-     x="2"
-     y="0"
-     width="546.0"
-     height="80"
-     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1px;" />
-      <text
-         x="275.0"
-         y="45"
-         style="font-size:22px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
-         xml:space="preserve">foo</text>
-    </g>
-<g id="operator_foo" transform="rotate(0 0.0 120) translate(0.0,120)">
+</g><g id="source_a" transform="rotate(15 250.0 30) translate(250.0,30)">
   <path 
      style="fill:none;fill-rule:evenodd;stroke:#003080;stroke-width:2px;marker-end:url(#Arrow1Lend)"
-     d="m 0,0 547.0,0"
+     d="m 0,0 459.346663144,0"
      inkscape:connector-curvature="0" />
 
 <g style="filter:url(#filter3443)">
   <circle
      r="22"
      cy="0"
-     cx="125.0"
+     cx="76.7638090205"
      style="opacity:1;fill:#56a075;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="7"
-     x="125.0"
+     x="76.7638090205"
+     style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
+     xml:space="preserve">x</text>
+</g>
+
+<g style="filter:url(#filter3443)">
+  <circle
+     r="22"
+     cy="0"
+     cx="180.291427062"
+     style="opacity:1;fill:#f1c40f;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+  <text
+     y="7"
+     x="180.291427062"
+     style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
+     xml:space="preserve">y</text>
+</g>
+
+<g style="filter:url(#filter3443)">
+  <circle
+     r="22"
+     cy="0"
+     cx="283.819045103"
+     style="opacity:1;fill:#C5EFF7;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+  <text
+     y="7"
+     x="283.819045103"
+     style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
+     xml:space="preserve">z</text>
+</g>
+
+<g>
+   <path d="m 387.346663144,-12 0,24"
+       style="fill:none;fill-rule:evenodd;stroke:#003080;stroke-width:4px;" />
+</g>
+</g><g id="source_a" transform="rotate(15 550.0 30) translate(550.0,30)">
+  <path 
+     style="fill:none;fill-rule:evenodd;stroke:#003080;stroke-width:2px;marker-end:url(#Arrow1Lend)"
+     d="m 0,0 459.346663144,0"
+     inkscape:connector-curvature="0" />
+
+<g style="filter:url(#filter3443)">
+  <circle
+     r="22"
+     cy="0"
+     cx="76.7638090205"
+     style="opacity:1;fill:#FDE3A7;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+  <text
+     y="7"
+     x="76.7638090205"
      style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
      xml:space="preserve">1</text>
 </g>
@@ -160,11 +194,11 @@
   <circle
      r="22"
      cy="0"
-     cx="225.0"
-     style="opacity:1;fill:#f1c40f;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     cx="180.291427062"
+     style="opacity:1;fill:#F1A9A0;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="7"
-     x="225.0"
+     x="180.291427062"
      style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
      xml:space="preserve">2</text>
 </g>
@@ -173,18 +207,18 @@
   <circle
      r="22"
      cy="0"
-     cx="375.0"
-     style="opacity:1;fill:#C5EFF7;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     cx="283.819045103"
+     style="opacity:1;fill:#f08080;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="7"
-     x="375.0"
+     x="283.819045103"
      style="font-size:20px;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;"
      xml:space="preserve">3</text>
 </g>
 
 <g>
-   <path d="m 475.0,-12 0,24"
+   <path d="m 387.346663144,-12 0,24"
        style="fill:none;fill-rule:evenodd;stroke:#003080;stroke-width:4px;" />
 </g>
-</g></g>
+</g>
  </svg>
