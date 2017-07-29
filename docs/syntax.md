@@ -1,28 +1,27 @@
 # Marble diagram syntax
-Each marble diagram begins with keyword `marble`, a string giving a name for the diagram, and with curly brackets containing diagram body:
+Each marble diagram begins with a `marble` keyword, followed by a string with a name of the diagram, and then a curly brackets containing diagram body.
 
-A minimal diagram contains one source or one operator, e.g.:
+A minimal diagram contains one source timeline can look like this:
 
 	marble foo
 	{
-		source a: +-A-> 
+		source example: +-A-> 
 	} 
 	
 
-Each `source` line begins a definition of an observable lifetime line: a **timeline**. The character `a` followed by a colon denotes identifier.
-Those identifiers are any strong tokens but are not used at the moment by a generator.
+Each `source` line begins a definition of an observable lifetime line: a **timeline**. The string `example` followed by a colon denotes source identifier. Those identifiers are mandatory. They can be any user-given simple tokens and are not used at the moment by the generator.
 
 The most interesting bit is the `+-A->` sequence which represents items emitted in time. 
-Each item is represented by a marble with a value in it.
 
 The sequence consists of ASCII characters having a special meaning for the gnerator. 
 
 * The `+` character is the starting point. Each timeline should have that.
-* The `-` character represents time advance. Character `>` represents end of timeline axis.
+* The `-` character represents time advance step. 
+* Character `>` represents end of timeline axis.
 * Any other character (a-z, A-Z, 0-9) represents an item emitted by the observable plus time advance step.
 
-The following diagram shows three observable timelines. Please pay attention how number of `-` and non-`-` characters 
-defines length of each timelines.
+The following diagram shows timelines for three observable source. Please pay attention how number of `-` and non-`-` characters 
+defines length of each timeline.
 
 	marble three
 	{
