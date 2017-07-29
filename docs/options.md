@@ -43,3 +43,10 @@ will generate diagram twice as small as by default
 
 Scale parameter equal 100 will work as default settings.
 
+# Theme
+You can use `--theme` command line option to select the style of output rendering.
+
+The marble diagram generator supports two themes:
+
+* a `default` theme, this one that is also taken when no command line option is specified
+* a `pencil` theme that is black and white sketch-like style

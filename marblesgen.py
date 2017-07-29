@@ -3,6 +3,8 @@ from svgshapes import *
 import sys
 import argparse
 import math
+from PIL.XVThumbImagePlugin import PALETTE
+import importlib
 
 start=Suppress("+")
 tickCharacter='-'
@@ -65,11 +67,12 @@ class Timeline:
         stepWidth = 1.0*self.baseThickWidth
         body= ", ".join(map(lambda x: str(x), subitems))
         width = stepWidth * len(subitems)
-        grouppedSymbol = Struct(xOffset, body, coloring, width, subitems, stepWidth)
+        grouppedSymbol = Struct(theme,xOffset, body, coloring, width, subitems, stepWidth)
         return grouppedSymbol
         
     def __getTimelineShapes(self, coloring, timelineItems):
         # adding ticks
+        global theme
         self.end = timelineItems.end
         xOffset = 0
         global parseString
@@ -79,17 +82,17 @@ class Timeline:
                 self.symbols.append(grouppedSymbol)
             else:
                 if o != tickCharacter:
-                    self.symbols.append(Marble(xOffset, 0, o, coloring))
+                    self.symbols.append(Marble(theme,xOffset, 0, o, coloring))
             xOffset += self.tickWidth
 
         # adding completion, error or infinity symbol to the axis 
         if self.end==terminateCharacter:
-            self.symbols.append(Terminate(xOffset))
+            self.symbols.append(Terminate(theme,xOffset))
         elif self.end==errorCharacter:
-            self.symbols.append(Error(xOffset))
+            self.symbols.append(Error(theme,xOffset))
 
         # adding time axis
-        self.symbols.insert(0, Axis(0,xOffset+2*self.baseThickWidth))
+        self.symbols.insert(0, Axis(theme,0,xOffset+2*self.baseThickWidth))
 
     def getSvg(self, y, coloring, maxLength):
         svg  = ""
@@ -111,7 +114,7 @@ class Timeline:
         # and finally - inserting an extra axis - only when we are in the skewed block mode
         if len(self.timelines) > 1:
             maxPadding = max(map(lambda x: len(x.padding), self.timelines))
-            a = Axis(0, self.baseThickWidth*(4+maxPadding))
+            a = Axis(theme,0, self.baseThickWidth*(4+maxPadding))
             axisSvg = '<g id="skew" transform="translate(0 %s)">%s</g>' % (yy, a.getShape())
             svg  = axisSvg + svg
         return svg
@@ -154,8 +157,9 @@ class Operator:
         return self.boxHeight+self.timeline.height()+ 2*self.topMargin
 
     def getSvg(self,y, coloring, maxLength):
+        global theme
         boxY = y+self.topMargin
-        box = OperatorBox(maxLength,self.boxHeight, self.name)
+        box = OperatorBox(theme,maxLength,self.boxHeight, self.name)
         svg = '<g transform="translate(0 %s)">' % boxY
         svg += box.getShape() + self.timeline.getSvg(0+self.boxHeight+self.topMargin, coloring, maxLength)
         svg += '</g>'
@@ -178,10 +182,16 @@ def getObjects(parseResult):
         result.append(t)
     return result
 
+default =   ["#f08080", "#f39c12", "#ecf0f1", "#56a075", "#f1c40f", "#C5EFF7", "#FDE3A7", "#F1A9A0"]
+
+palettes = {'default':default}
+
 class Coloring:
     'This object is stateful color provider for each of the marble'
-    def __init__(self):
-        self.colorPalette = ["#f08080","#f39c12","#ecf0f1","#56a075","#f1c40f","#C5EFF7","#FDE3A7","#F1A9A0"]
+    
+    def __init__(self, paletteName='default'):
+        global palettes
+        self.colorPalette = palettes[paletteName]
         self.colormap = {}
         self.index = 0
 
@@ -208,7 +218,7 @@ class SvgDocument:
             y = y + row.height()
 
         global args
-        r = Root(body, self.maxRowWidth, y, args.scale/100.0)
+        r = Root(theme,body, self.maxRowWidth, y, args.scale/100.0)
         return r.node
     
 
@@ -234,8 +244,12 @@ parser.add_argument('inputfile', metavar='MARBLES-FILE', type=str,  help='path t
 parser.add_argument('--scale', type=float, default=100.0,  help='scale used to control zoom level of the generated images')
 parser.add_argument('--verbose', '-v', action='count', default=0, help='enables verbose mode')
 parser.add_argument('--output', '-o', default=None, type=str, help='Sets the file name for the output. Note: only first diagram from the input file will be generated.')
+parser.add_argument('--theme', '-t', default='default', type=str, help='Sets the theme used to render SVG output.')
 args = parser.parse_args()
-        
+
+# this is where we import global theme object
+theme = importlib.import_module('theme.'+args.theme)
+
 diagramsFileName = args.inputfile
 f = open(diagramsFileName,"r")
 a = f.read()
@@ -249,3 +263,4 @@ if not args.output is None:
 else:
     generate_batch(marbleDiagrams)
         
+
