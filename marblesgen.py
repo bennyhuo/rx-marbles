@@ -182,7 +182,7 @@ def getObjects(parseResult):
         result.append(t)
     return result
 
-default =   ["#f08080", "#f39c12", "#ecf0f1", "#56a075", "#f1c40f", "#C5EFF7", "#FDE3A7", "#F1A9A0"]
+default =   ["#ffcc00", "#48b3cd", "#ffaacc", "#e5ff7c", "#ececec", "#a4ecff", "#ff6600", "#a0c800", "#ff3a3a","#afafe9","#db7c7c","#80ffe6"]
 
 palettes = {'default':default}
 

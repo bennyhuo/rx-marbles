@@ -90,7 +90,7 @@
      r="22"
      cy="3"
      cx="75.0"
-     style="opacity:1;fill:#f39c12;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     style="opacity:1;fill:#48b3cd;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="10"
      x="75.0"
@@ -103,7 +103,7 @@
      r="22"
      cy="53.0"
      cx="75.0"
-     style="opacity:1;fill:#ecf0f1;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     style="opacity:1;fill:#ffaacc;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="60.0"
      x="75.0"
@@ -127,7 +127,7 @@
      r="22"
      cy="3"
      cx="175.0"
-     style="opacity:1;fill:#f1c40f;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     style="opacity:1;fill:#ececec;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="10"
      x="175.0"
@@ -140,7 +140,7 @@
      r="22"
      cy="53.0"
      cx="175.0"
-     style="opacity:1;fill:#C5EFF7;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     style="opacity:1;fill:#a4ecff;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="60.0"
      x="175.0"
@@ -153,7 +153,7 @@
      r="22"
      cy="103.0"
      cx="175.0"
-     style="opacity:1;fill:#FDE3A7;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     style="opacity:1;fill:#ff6600;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="110.0"
      x="175.0"
@@ -177,7 +177,7 @@
      r="22"
      cy="3"
      cx="275.0"
-     style="opacity:1;fill:#f08080;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     style="opacity:1;fill:#ff3a3a;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="10"
      x="275.0"
@@ -190,7 +190,7 @@
      r="22"
      cy="53.0"
      cx="275.0"
-     style="opacity:1;fill:#f39c12;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
+     style="opacity:1;fill:#afafe9;fill-opacity:1;stroke:#003080;stroke-width:1px;" />
   <text
      y="60.0"
      x="275.0"
