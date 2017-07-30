@@ -47,3 +47,4 @@ that have proper version of Python installed.
 
 * [staltz/rxmarbles](https://github.com/staltz/rxmarbles)
 * [aheckmann/gm](https://github.com/aheckmann/gm)
+* [LeeCampbell/MarbleDiagram](https://github.com/LeeCampbell/MarbleDiagram/tree/master/LinqPad)
