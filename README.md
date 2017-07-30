@@ -43,6 +43,9 @@ that have proper version of Python installed.
 * [Marble diagram syntax](docs/syntax.md)
 * [Generator options](docs/options.md)
 
+# License
+Available under [MIT license](LICENSE).
+
 # Other generators
 
 * [staltz/rxmarbles](https://github.com/staltz/rxmarbles)
