@@ -33,7 +33,7 @@ This will produce the following diagram:
 ![foo_example.svg](https://bitbucket.org/achary/rx-marbles/raw/master/docs/foo_example.svg)
 
 # Requirements
-To run this marbles diagram generator, you need Python 2.7.x with `pyparsing` module installed.
+To run this marbles diagram generator, you need Python 2.7.x or 3.x with `pyparsing` module installed.
 
 The generator's code is fairly platform agnostic and can be used on Linux, Window, Macs and possible other platforms
 that have proper version of Python installed.
