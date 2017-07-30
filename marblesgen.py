@@ -1,3 +1,4 @@
+from __future__ import print_function
 from pyparsing import *
 from svgshapes import *
 import sys
@@ -224,7 +225,7 @@ class SvgDocument:
 
 def generate_single(diagram, fileName):
         if args.verbose > 0:
-            print "Generating diagram for '%s' => %s" %(diagram[0],  fileName)
+            print ("Generating diagram for '%s' => %s" %(diagram[0],  fileName))
     
         marbles = diagram[1:]
         r = getObjects(marbles)
