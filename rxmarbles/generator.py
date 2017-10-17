@@ -1,6 +1,6 @@
 from __future__ import print_function
 from pyparsing import *
-from svgshapes import *
+from .svgshapes import *
 import sys
 import argparse
 import math

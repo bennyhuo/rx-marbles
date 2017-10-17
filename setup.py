@@ -3,9 +3,10 @@ from setuptools import setup
 setup(name='rxmarbles',
       version='0.1',
       description='Marbles diagram generator',
-      url='https://achary@bitbucket.org/achary/rx-marbles.git',
+      url='https://bitbucket.org/achary/rx-marbles/',
       author='Adam Charytoniuk',
       author_email="adam.charytoniuk@gmail.com",
+      keywords = ['marbles', 'rx', 'diagrams','reactive'],
       license='MIT',
       packages=setuptools.find_packages(),
        entry_points={

@@ -6,8 +6,8 @@ import sys
 import argparse
 import math
 import importlib
-from svgshapes import *
-from generator import *
+from .svgshapes import *
+from .generator import *
 
 
 def generate_single(diagram, fileName, args, theme):
