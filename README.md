@@ -14,6 +14,15 @@ This is yet another marble diagram generator for documenting Reactive Extensions
 * auto-coloring marbles representing identical values 
 * generation multiple diagram images from a single file (batch mode)
 
+# Installation
+The oneliner installation on Linux (to local user honme directory)  is: 
+
+	git clone https://achary@bitbucket.org/achary/rx-marbles.git && \
+	cd rx-marbles && \
+	pip install --user .
+
+The `marblesgen` executable will become available from the command prompt.
+
 # Example
 
 A simple text file (foo.txt) with a marble diagram can look like this:
@@ -26,7 +35,7 @@ A simple text file (foo.txt) with a marble diagram can look like this:
 
 To generate SVG image out of it, you can run:
 
-	python marblesgen.py foo.txt 
+	marblesgen foo.txt 
 	
 This will produce the following diagram:
 

@@ -22,12 +22,12 @@ will produce two output files: `foo.svg` and `bar.svg`.
 	
 Batch mode requires only one argument for the generator: a source file name with marble diagram(s):
 
-	python marblesgen.py diagrams.txt
+	marblesgen diagrams.txt
 	
 ## Single file mode
 It is possible to run generator in 1-to-1 mode, where a single source file with a single diagram can be used to generate one SVG file with user-given (and not source-code-based) name:
  
-	python marblesgen.py diagrams.txt --output my-foo-file.svg
+	marblesgen diagrams.txt --output my-foo-file.svg
 	
 will generate one `my-foo-file.svg` with **only the very first diagram** taken from the source file given.
 
@@ -37,7 +37,7 @@ It is possible to increase or decrease default size of generated diagrams with `
 
 For example:
 
-	python marblesgen.py diagrams.txt --output my-foo-file.svg --scale 50 
+	marblesgen diagrams.txt --output my-foo-file.svg --scale 50 
 
 will generate diagram twice as small as by default
 
