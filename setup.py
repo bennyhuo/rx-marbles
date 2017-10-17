@@ -5,6 +5,7 @@ setup(name='rxmarbles',
       description='Marbles diagram generator',
       url='https://achary@bitbucket.org/achary/rx-marbles.git',
       author='Adam Charytoniuk',
+      author_email="adam.charytoniuk@gmail.com",
       license='MIT',
       packages=setuptools.find_packages(),
        entry_points={
