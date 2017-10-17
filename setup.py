@@ -1,6 +1,6 @@
-from setuptools import setup
+import setuptools
 
-setup(name='rxmarbles',
+setuptools.setup(name='rxmarbles',
       version='0.1',
       description='Marbles diagram generator',
       url='https://bitbucket.org/achary/rx-marbles/',
