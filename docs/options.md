@@ -50,3 +50,14 @@ The marble diagram generator supports two themes:
 
 * a `default` theme, this one that is also taken when no command line option is specified
 * a `pencil` theme that is black and white sketch-like style
+
+## Examples
+The `default` theme produces diagrams of this style:
+
+![foo-default.svg](https://bitbucket.org/achary/rx-marbles/raw/master/docs/foo-default.svg)
+
+The `pencil` theme produces diagrams with this style:
+
+![foo-pencil.svg](https://bitbucket.org/achary/rx-marbles/raw/master/docs/foo-pencil.svg)
+
+Note: the `pencil` theme uses `purisa` font and requires it to be installed on the system.
