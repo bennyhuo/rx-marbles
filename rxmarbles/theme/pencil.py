@@ -1,7 +1,7 @@
 from numpy.random import random
 import random
 
-root='''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+root = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -75,7 +75,7 @@ root='''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
  </svg>
 '''
 
-circ1='''
+circ1 = '''
 <g transform="translate(%s %s)">
 <path
      sodipodi:nodetypes="cccc"
@@ -139,7 +139,7 @@ circ4 = '''
      xml:space="preserve">%s</text>
 </g>
 '''
-arrow='''
+arrow = '''
 <g transform="scale(%s %s) translate(%s %s)">
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -159,14 +159,14 @@ arrow='''
 
 '''
 
-end='''
+end = '''
 <g>
    <path d="m %s,%s -1,32"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4px;" />
 </g>
 '''
 
-err='''
+err = '''
 <g id="error">
     <path
        inkscape:connector-curvature="0"
@@ -179,7 +179,7 @@ err='''
 </g>
 '''
 # this one is used for operator box
-block='''
+block = '''
 <g transform="scale(%s %s) translate(%s %s)">
 <path
      style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.42857146px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -197,7 +197,7 @@ block='''
 
 '''
 
-#- this one is used for groupping
+# - this one is used for groupping
 groupping_block = '''
 <g >
     <rect
@@ -215,36 +215,36 @@ groupping_block = '''
 # this is the theme interface
 #================================================== 
 class Circle:
-    def __init__(self,x,y,text,color):
+    def __init__(self, x, y, text, color):
         global circ1
         global circ2
         global circ3
-        shapes = [circ1,circ2,circ3]
-        index = random.randint(0, len(shapes)-1)
+        shapes = [circ1, circ2, circ3]
+        index = random.randint(0, len(shapes) - 1)
         circ = shapes[index]
-        self.node = circ % (x+25,y,text)
+        self.node = circ % (x + 25, y, text)
 
 class Arrow:
-    def __init__(self,x,y,start,size):
+    def __init__(self, x, y, start, size):
         global arrow
-        self.node = arrow % (1.0*size/450.0,0.75, x+25+start,y, x+22+start+size,y+2)
+        self.node = arrow % (1.0 * size / 450.0, 0.75, x + 25 + start, y, x + 22 + start + size, y + 2)
 
 class End:
-    def __init__(self,x,y):
+    def __init__(self, x, y):
         global end
-        self.node = end % (x+25,y-12)
+        self.node = end % (x + 25, y - 12)
 
 class Err:
-    def __init__(self,x,y):
+    def __init__(self, x, y):
         global err
-        self.node = err % (x+25+18,y-18,x+25-14,y-18)
+        self.node = err % (x + 25 + 18, y - 18, x + 25 - 14, y - 18)
 
 class BlockWithText:
-    def __init__(self,x,y,text,color, width,height):
+    def __init__(self, x, y, text, color, width, height):
         global groupping_block
-        self.node = groupping_block % (y-22,x,width,height,"white")
+        self.node = groupping_block % (y - 22, x, width, height, "white")
 
 class Block:
-    def __init__(self,x,y,width,height,text,color):
+    def __init__(self, x, y, width, height, text, color):
         global block
-        self.node = block % (width/460.0,1,x,y,      x+width/2.0, y+height/2.0,text)
+        self.node = block % (width / 460.0, 1, x, y, x + width / 2.0, y + height / 2.0, text)

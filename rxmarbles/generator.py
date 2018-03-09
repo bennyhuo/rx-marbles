@@ -7,22 +7,21 @@ import math
 import importlib
 
 start = Suppress("+")
-tickCharacter = '-'
-terminateCharacter = "|"
-errorCharacter = "#"
+tick_character = '-'
+terminate_character = "|"
+error_character = "#"
 infinity = ">"
 
 colon = Suppress(":")
 comment_start = "//"
-empty_tick = Word(tickCharacter, exact=1)
-# our marble can be either single alphanumeric character, or mutiple characters surrounded by ()
+empty_tick = Word(tick_character, exact=1)
+# our marble can be either single alphanumeric character, or multiple characters surrounded by ()
 marble_text = alphanums + "'\""
-
-simpleMarble = Word(marble_text, exact=1)
-brackedMarble = Suppress("(") + Word(alphanums + "'\".") + Suppress(")")
-grouppedMarble = Combine("{" + Word(marble_text + ",") + "}")
-marble = Or([simpleMarble, brackedMarble , grouppedMarble])
-end = Or([terminateCharacter, errorCharacter, infinity]).setResultsName('end')
+simple_marble = Word(marble_text, exact=1)
+bracked_marble = Suppress("(") + Word(alphanums + "'\".") + Suppress(")")
+groupped_marble = Combine("{" + Word(marble_text + ",") + "}")
+marble = Or([simple_marble, bracked_marble , groupped_marble])
+end = Or([terminate_character, error_character, infinity]).setResultsName('end')
 item = Word(alphanums)
 source_name = Word(alphanums + "{}(),><=!+-'/\"").setResultsName('name')
 source_keyword = "source"
@@ -43,127 +42,127 @@ marble_diagrams = OneOrMore(marble_diagram)
 marble_diagrams.ignore(comment_start + restOfLine)
 
 class Timeline:
-    def __init__(self, parsedlist, theme):
+    def __init__(self, parsed_list, theme):
         self.theme = theme
-        self.type = parsedlist.type
-        self.name = parsedlist.name
-        self.timelines = parsedlist.timeline
-        self.rotation = 0
+        self.type = parsed_list.type
+        self.name = parsed_list.name
+        self.timelines = parsed_list.timeline
+        self.rotation_deg = 0
         if len(self.timelines) > 1:
-            self.rotation = 15
-        maxIndex = max(map(lambda x: 2 + len(x.ticks) + len(x.padding), self.timelines))
+            self.rotation_deg = 15
+        max_index = max(map(lambda x: 2 + len(x.ticks) + len(x.padding), self.timelines))
         # this is used as distance on flat axis between two time ticks
-        self.baseThickWidth = 50.0
+        self.base_thick_width = 50.0
         # this is used as distance on skewed between two time ticks
-        self.tickWidth = self.baseThickWidth / math.cos(self.rotation * math.pi / 180.0)
+        self.tick_width = self.base_thick_width / math.cos(self.rotation_deg * math.pi / 180.0)
         
-        self.width = self.tickWidth * maxIndex
-        self.topMargin = 30
-        self.totalHeight = 0
+        self.width = self.tick_width * max_index
+        self.top_margin = 30
+        self.total_height = 0
         
-    def createGrouppedSymbol(self, o, xOffset, coloring):
+    def create_groupped_symbol(self, o, x_offset, coloring):
         # Sub-parsing groupped marble
-        ungrouppedMarble = Suppress("{") + Word(marble_text) + ZeroOrMore(Suppress(",") + Word(marble_text)) + Suppress("}")
-        subitems = ungrouppedMarble.parseString(o)
-        stepWidth = 1.0 * self.baseThickWidth
+        ungroupped_marble = Suppress("{") + Word(marble_text) + ZeroOrMore(Suppress(",") + Word(marble_text)) + Suppress("}")
+        subitems = ungroupped_marble.parseString(o)
+        step_width = 1.0 * self.base_thick_width
         body = ", ".join(map(lambda x: str(x), subitems))
-        width = stepWidth * len(subitems)
-        grouppedSymbol = Struct(self.theme, xOffset, body, coloring, width, subitems, stepWidth)
-        return grouppedSymbol
+        width = step_width * len(subitems)
+        groupped_symbol = Struct(self.theme, x_offset, body, coloring, width, subitems, step_width)
+        return groupped_symbol
         
-    def __getTimelineShapes(self, coloring, timelineItems):
+    def __get_timeline_shapes(self, coloring, timeline_items):
         # adding ticks
         theme = self.theme
-        self.end = timelineItems.end
-        xOffset = 0
+        self.end = timeline_items.end
+        x_offset = 0
         global parseString
-        for o in timelineItems.ticks:
+        for o in timeline_items.ticks:
             if o.startswith('{') and o.endswith('}'):
-                grouppedSymbol = self.createGrouppedSymbol(o, xOffset, coloring)
-                self.symbols.append(grouppedSymbol)
+                groupped_symbol = self.create_groupped_symbol(o, x_offset, coloring)
+                self.symbols.append(groupped_symbol)
             else:
-                if o != tickCharacter:
-                    self.symbols.append(Marble(theme, xOffset, 0, o, coloring))
-            xOffset += self.tickWidth
+                if o != tick_character:
+                    self.symbols.append(Marble(theme, x_offset, 0, o, coloring))
+            x_offset += self.tick_width
 
         # adding completion, error or infinity symbol to the axis 
-        if self.end == terminateCharacter:
-            self.symbols.append(Terminate(theme, xOffset))
-        elif self.end == errorCharacter:
-            self.symbols.append(Error(theme, xOffset))
+        if self.end == terminate_character:
+            self.symbols.append(Terminate(theme, x_offset))
+        elif self.end == error_character:
+            self.symbols.append(Error(theme, x_offset))
 
         # adding time axis
-        self.symbols.insert(0, Axis(theme, 0, xOffset + 2 * self.baseThickWidth))
+        self.symbols.insert(0, Axis(theme, 0, x_offset + 2 * self.base_thick_width))
 
-    def getSvg(self, y, coloring, maxLength):
+    def get_svg(self, y, coloring, max_length):
         svg = ""
-        yy = y + self.topMargin
-        for timelineItems in self.timelines: 
+        yy = y + self.top_margin
+        for timeline_items in self.timelines: 
             self.symbols = []
-            self.__getTimelineShapes(coloring, timelineItems)
-            xOffset = self.baseThickWidth * len(timelineItems.padding)
+            self.__get_timeline_shapes(coloring, timeline_items)
+            x_offset = self.base_thick_width * len(timeline_items.padding)
             g_id = self.type + "_" + self.name
-            rotYY = yy
-            svg += '<g id="%s" transform="rotate(%s %s %s) translate(%s,%s)">' % (g_id, self.rotation, xOffset, rotYY , xOffset, yy)
+            rot_yy = yy
+            svg += '<g id="%s" transform="rotate(%s %s %s) translate(%s,%s)">' % (g_id, self.rotation_deg, x_offset, rot_yy , x_offset, yy)
             for obj in self.symbols:
-                svg += obj.getShape()
-                h = obj.getHeight()
-                if self.totalHeight < h + self.topMargin :
-                    self.totalHeight = h + self.topMargin 
+                svg += obj.get_shape()
+                h = obj.get_height()
+                if self.total_height < h + self.top_margin :
+                    self.total_height = h + self.top_margin 
             svg += '</g>'
             
         # and finally - inserting an extra axis - only when we are in the skewed block mode
         if len(self.timelines) > 1:
-            maxPadding = max(map(lambda x: len(x.padding), self.timelines))
-            a = Axis(self.theme, 0, self.baseThickWidth * (4 + maxPadding))
-            axisSvg = '<g id="skew" transform="translate(0 %s)">%s</g>' % (yy, a.getShape())
+            max_padding = max(map(lambda x: len(x.padding), self.timelines))
+            a = Axis(self.theme, 0, self.base_thick_width * (4 + max_padding))
+            axisSvg = '<g id="skew" transform="translate(0 %s)">%s</g>' % (yy, a.get_shape())
             svg = axisSvg + svg
         return svg
 
     def height(self):
-        "returns height in pixels. This must be called after getSvg()"
+        "returns height in pixels. This must be called after get_svg()"
         
         # let's calculate all bounding boxes
-        maxHeight = 0
+        max_height = 0
         for timeline in self.timelines:
-            timelineWidth = self.baseThickWidth * (1 + len(timeline.ticks))
-            timelineHeight = self.totalHeight
-            bb = (timelineWidth, timelineHeight)
+            timeline_width = self.base_thick_width * (1 + len(timeline.ticks))
+            timeline_height = self.total_height
+            bb = (timeline_width, timeline_height)
             # width of the diagonal
             diag = math.sqrt(bb[0] * bb[0] + bb[1] * bb[1])
-            alphaRad = math.atan2(bb[1], bb[0])
-            alphaDeg = alphaRad * 180.0 / math.pi
+            alpha_rad = math.atan2(bb[1], bb[0])
+            alpha_deg = alpha_rad * 180.0 / math.pi
             # after rotation
-            betaDeg = alphaDeg + self.rotation
-            betaRad = betaDeg * math.pi / 180.0 
-            height = diag * math.sin(betaRad)
-            if maxHeight < height:
-                maxHeight = height 
-        return maxHeight
+            beta_deg = alpha_deg + self.rotation_deg
+            beta_rad = beta_deg * math.pi / 180.0 
+            height = diag * math.sin(beta_rad)
+            if max_height < height:
+                max_height = height 
+        return max_height
 
 class Source(Timeline):
-    def __init__(self, parsedList, theme):
-        Timeline.__init__(self, parsedList, theme)
+    def __init__(self, parsed_list, theme):
+        Timeline.__init__(self, parsed_list, theme)
 
 class Operator:
-    def __init__(self, parsedList, theme):
+    def __init__(self, parsed_list, theme):
         self.theme = theme
-        self.timeline = Timeline(parsedList, theme)
-        self.name = parsedList.name
+        self.timeline = Timeline(parsed_list, theme)
+        self.name = parsed_list.name
         self.width = self.timeline.width
-        self.boxHeight = 80
-        self.topMargin = 10
+        self.box_height = 80
+        self.top_margin = 10
 
     def height(self):
         "height in pixels"
-        return self.boxHeight + self.timeline.height() + 2 * self.topMargin
+        return self.box_height + self.timeline.height() + 2 * self.top_margin
 
-    def getSvg(self, y, coloring, maxLength):
+    def get_svg(self, y, coloring, max_length):
         theme = self.theme
-        boxY = y + self.topMargin
-        box = OperatorBox(theme, maxLength, self.boxHeight, self.name)
-        svg = '<g transform="translate(0 %s)">' % boxY
-        svg += box.getShape() + self.timeline.getSvg(0 + self.boxHeight + self.topMargin, coloring, maxLength)
+        box_y = y + self.top_margin
+        box = OperatorBox(theme, max_length, self.box_height, self.name)
+        svg = '<g transform="translate(0 %s)">' % box_y
+        svg += box.get_shape() + self.timeline.get_svg(0 + self.box_height + self.top_margin, coloring, max_length)
         svg += '</g>'
         return svg
 
@@ -171,58 +170,59 @@ class Operator:
 # timeline elements
 # ---------------------------------------------------
 
-def getObjects(parseResult, theme):
+def get_objects(parse_result, theme):
     global source_keyword
     global operator_keyword
     result = []
-    for line in parseResult:
+    for line in parse_result:
         type = line[0]
         if type == operator_keyword:
             t = Operator(line, theme)
-        if type == source_keyword:
+        elif type == source_keyword:
             t = Source(line, theme)
+        else:
+            raise Exception("unsupported type")
         result.append(t)
     return result
 
-default = ["#ffcc00", "#48b3cd", "#ffaacc", "#e5ff7c", "#ececec", "#a4ecff", "#ff6600", "#a0c800", "#ff3a3a", "#afafe9", "#db7c7c", "#80ffe6"]
-
-palettes = {'default':default}
+# other colouring schemes can be added here
+palettes = {'default': ["#ffcc00", "#48b3cd", "#ffaacc", "#e5ff7c", "#ececec", "#a4ecff", "#ff6600", "#a0c800", "#ff3a3a", "#afafe9", "#db7c7c", "#80ffe6"]}
 
 class Coloring:
     'This object is stateful color provider for each of the marble'
     
     def __init__(self, paletteName='default'):
         global palettes
-        self.colorPalette = palettes[paletteName]
+        self.color_palette = palettes[paletteName]
         self.colormap = {}
         self.index = 0
 
-    def getColorFor(self, marbleId):
+    def get_color_for(self, marbleId):
         if not marbleId in self.colormap:
-            self.colormap[marbleId] = self.colorPalette[self.index]
+            self.colormap[marbleId] = self.color_palette[self.index]
             self.index += 1
-            if self.index >= len(self.colorPalette):
+            if self.index >= len(self.color_palette):
                 self.index = 0
         return self.colormap[marbleId]
 
 class SvgDocument:
-    def __init__(self, rowObjects, theme, scale):
+    def __init__(self, row_objects, theme, scale):
         self.theme = theme
         self.scale = scale
         self.coloring = Coloring()
-        self.rowObjects = rowObjects
+        self.row_objects = row_objects
         # in pixels
-        self.maxRowWidth = max(map(lambda row: row.width, self.rowObjects))
+        self.max_row_width = max(map(lambda row: row.width, self.row_objects))
 
-    def getDocument(self):
+    def get_document(self):
         theme = self.theme
         scale = self.scale
         body = ""
         y = 0
-        for row in self.rowObjects:
-            body += row.getSvg(y, self.coloring, self.maxRowWidth)
+        for row in self.row_objects:
+            body += row.get_svg(y, self.coloring, self.max_row_width)
             y = y + row.height()
 
-        r = Root(theme, body, self.maxRowWidth, y, scale / 100.0)
+        r = Root(theme, body, self.max_row_width, y, scale / 100.0)
         return r.node
-    
+

@@ -2,110 +2,110 @@
 # timeline elements in SVG
 # ---------------------------------------------------
 class Root:
-    def __init__(self, theme, body, maxLengthPx, maxHeightPx, scale):
-        self.node = theme.root % (maxLengthPx * scale, maxHeightPx * scale, maxLengthPx, maxHeightPx, body)
+    def __init__(self, theme, body, max_length_px, max_height_px, scale):
+        self.node = theme.root % (max_length_px * scale, max_height_px * scale, max_length_px, max_height_px, body)
         self.theme = theme
         
 class Axis:
-    def __init__(self, theme, startXOffset, endXOffset):
-        self.endXOffset = endXOffset
-        self.startXOffset = startXOffset
+    def __init__(self, theme, start_x_offset, end_x_offset):
+        self.end_x_offset = end_x_offset
+        self.start_x_offset = start_x_offset
         self.theme = theme
 
-    def getShape(self):
+    def get_shape(self):
         y = 0
-        t = self.theme.Arrow(-25, y, self.startXOffset, self.endXOffset)
+        t = self.theme.Arrow(-25, y, self.start_x_offset, self.end_x_offset)
         return t.node
     
-    def getHeight(self):
+    def get_height(self):
         return 20
 
 
 class Marble:
-    def __init__(self, theme, xOffset, y, text, coloring):
+    def __init__(self, theme, x_offset, y, text, coloring):
         self.theme = theme
-        self.xOffset = xOffset
-        self.color = coloring.getColorFor(text)
+        self.x_offset = x_offset
+        self.color = coloring.get_color_for(text)
         self.text = text
         self.y = y
 
-    def getShape(self):
-        c = self.theme.Circle(self.xOffset, self.y, self.text, self.color)
+    def get_shape(self):
+        c = self.theme.Circle(self.x_offset, self.y, self.text, self.color)
         return c.node
     
-    def getHeight(self):
+    def get_height(self):
         return 50
 
 class Struct:
-    def __init__(self, theme, xOffset, text, coloring, width, subitems, stepWidth):
+    def __init__(self, theme, x_offset, text, coloring, width, subitems, step_width):
         self.theme = theme
-        self.xOffset = xOffset
-        self.color = coloring.getColorFor(text)
+        self.x_offset = x_offset
+        self.color = coloring.get_color_for(text)
         self.text = text
         self.width = width
         self.subitems = subitems
-        self.stepWidth = stepWidth
+        self.step_width = step_width
         self.coloring = coloring
-        self.height = self.stepWidth * len(self.subitems)
-        self.shape = self.createShape()
+        self.height = self.step_width * len(self.subitems)
+        self.shape = self.create_shape()
 
-    def createShape(self):
+    def create_shape(self):
         y = 0
-        c = self.theme.BlockWithText(self.xOffset, y, self.text, self.color, self.stepWidth, self.height)
-        xOffset = self.xOffset
-        yOffset = 3
+        c = self.theme.BlockWithText(self.x_offset, y, self.text, self.color, self.step_width, self.height)
+        x_offset = self.x_offset
+        y_offset = 3
         svg = ""
         for m in self.subitems:
-            m = Marble(self.theme, xOffset, yOffset, m, self.coloring)
-            svg += m.getShape()
-            yOffset += self.stepWidth
+            m = Marble(self.theme, x_offset, y_offset, m, self.coloring)
+            svg += m.get_shape()
+            y_offset += self.step_width
         return c.node + svg
     
-    def getShape(self):
+    def get_shape(self):
         return self.shape
     
-    def getHeight(self):
+    def get_height(self):
         return self.height
 
 class Terminate:
-    def __init__(self, theme, xOffset):
+    def __init__(self, theme, x_offset):
         self.theme = theme
-        self.xOffset = xOffset
+        self.x_offset = x_offset
 
-    def getShape(self):
+    def get_shape(self):
         y = 0
-        e = self.theme.End(self.xOffset, y)
+        e = self.theme.End(self.x_offset, y)
         return e.node
     
-    def getHeight(self):
+    def get_height(self):
         return 50
 
 class Error:
-    def __init__(self, theme, xOffset):
+    def __init__(self, theme, x_offset):
         self.theme = theme
-        self.xOffset = xOffset
+        self.x_offset = x_offset
 
-    def getShape(self):
+    def get_shape(self):
         y = 0
-        e = self.theme.Err(self.xOffset, y)
+        e = self.theme.Err(self.x_offset, y)
         return e.node
 
-    def getHeight(self):
+    def get_height(self):
         return 50
 
 class OperatorBox:
-    def __init__(self, theme, maxLengthPx, height, text):
+    def __init__(self, theme, max_length_px, height, text):
         self.theme = theme
-        self.maxLengthPx = maxLengthPx
+        self.max_length_px = max_length_px
         self.height = height
         self.text = text
 
-    def getShape(self):
+    def get_shape(self):
         margin = 2
         y = 0
-        box = self.theme.Block(0 + margin, y, self.maxLengthPx - 2 * margin, self.height, self.text, "white");
-#         return self.theme.block % (0+margin,y,self.maxLengthPx-2*margin,self.height, self.maxLengthPx/2.0, y+self.height/2+5, self.text)
+        box = self.theme.Block(0 + margin, y, self.max_length_px - 2 * margin, self.height, self.text, "white");
+#         return self.theme.block % (0+margin,y,self.max_length_px-2*margin,self.height, self.max_length_px/2.0, y+self.height/2+5, self.text)
         return box.node
 
-    def getHeight(self):
+    def get_height(self):
         return 70

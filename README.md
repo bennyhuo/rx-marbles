@@ -15,13 +15,18 @@ This is yet another marble diagram generator for documenting Reactive Extensions
 * generation multiple diagram images from a single file (batch mode)
 
 # Installation
-The oneliner installation on Linux (to local user honme directory)  is: 
+The oneliner installation on Linux (to local user home directory)  is: 
 
 	git clone https://achary@bitbucket.org/achary/rx-marbles.git && \
 	cd rx-marbles && \
 	pip install --user .
 
 The `marblesgen` executable will become available from the command prompt.
+
+# Running without installation
+You can run the generator without installation, from the source code tree, e.g:
+
+	python -m rxmarbles --help
 
 # Example
 
