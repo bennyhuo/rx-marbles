@@ -6,33 +6,33 @@ import argparse
 import math
 import importlib
 
-start = Suppress("+")
-tick_character = '-'
-terminate_character = "|"
+start_character = Suppress("+")
+nop_event_character = '-'
+completion_symbol = "|"
 error_character = "#"
-infinity = ">"
+infinity_character = ">"
 
 colon = Suppress(":")
 comment_start = "//"
-empty_tick = Word(tick_character, exact=1)
+empty_tick = Word(nop_event_character, exact=1)
 # our marble can be either single alphanumeric character, or multiple characters surrounded by ()
-marble_text = alphanums + "'\""
+marble_text = alphanums
 simple_marble = Word(marble_text, exact=1)
-bracked_marble = Suppress("(") + Word(alphanums + "'\".") + Suppress(")")
+bracked_marble = Suppress("(") + Word(alphanums + "'\"._-") + Suppress(")")
 groupped_marble = Combine("{" + Word(marble_text + ",") + "}")
 marble = Or([simple_marble, bracked_marble , groupped_marble])
-end = Or([terminate_character, error_character, infinity]).setResultsName('end')
+end = Or([completion_symbol, error_character, infinity_character]).setResultsName('end')
 item = Word(alphanums)
-source_name = Word(alphanums + "{}(),><=!+-'/\"").setResultsName('name')
+timeline_name = Word(alphanums + ",./<>?;'\"[]\{}|`~!@#$%^&*()-=_+").setResultsName('name')
 source_keyword = "source"
 operator_keyword = "operator"
 tick = Or([empty_tick, marble])
 ticks = Group(ZeroOrMore(tick)).setResultsName('ticks')
 padding = Optional(Word('.')).setResultsName('padding')
-timeline = Group(padding + start + ticks + end).setResultsName('timeline', True)
+timeline = Group(padding + start_character + ticks + end).setResultsName('timeline', True)
 skewed_group = Suppress("{") + OneOrMore(timeline) + Suppress("}")
 type = Or([source_keyword, operator_keyword]).setResultsName('type')
-source_or_operator = Group(type + source_name + colon + Or([timeline, skewed_group]))
+source_or_operator = Group(type + timeline_name + colon + Or([timeline, skewed_group]))
 
 marble_diagram_keyword = "marble"
 marble_diagram_body = OneOrMore(source_or_operator)
@@ -80,13 +80,12 @@ class Timeline:
             if o.startswith('{') and o.endswith('}'):
                 groupped_symbol = self.create_groupped_symbol(o, x_offset, coloring)
                 self.symbols.append(groupped_symbol)
-            else:
-                if o != tick_character:
-                    self.symbols.append(Marble(theme, x_offset, 0, o, coloring))
+            elif o != nop_event_character:
+                self.symbols.append(Marble(theme, x_offset, 0, o, coloring))
             x_offset += self.tick_width
 
-        # adding completion, error or infinity symbol to the axis 
-        if self.end == terminate_character:
+        # adding completion, error or infinity_character symbol to the axis 
+        if self.end == completion_symbol:
             self.symbols.append(Terminate(theme, x_offset))
         elif self.end == error_character:
             self.symbols.append(Error(theme, x_offset))

@@ -52,6 +52,11 @@ To run this marbles diagram generator, you need Python 2.7.x or 3.x with `pypars
 The generator's code is fairly platform agnostic and can be used on Linux, Window, Macs and possible other platforms
 that have proper version of Python installed.
 
+# Unit tests
+All unit tests for the generator are located in `tests` subdirectory. They can be executed from top-level project dir with:
+
+	python -m unittest discover tests/
+
 # Details
 
 * [Marble diagram syntax](docs/syntax.md)
