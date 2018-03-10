@@ -11,11 +11,11 @@ This is yet another marble diagram generator for documenting Reactive Extensions
 * adjusting starting point of a timeline with number of `.` characters at the beginning of a timeline 
 * easier visual adjustment between timelines in source files with white spaces in timeline
 * scaling dimension of a default SVG view box for generated diagrams 
-* auto-coloring marbles representing identical values 
+* auto-colouring marbles representing identical values 
 * generation multiple diagram images from a single file (batch mode)
 
 # Installation
-The oneliner installation on Linux (to local user home directory)  is: 
+The one-liner installation on Linux (to local user home directory)  is: 
 
 	git clone https://achary@bitbucket.org/achary/rx-marbles.git && \
 	cd rx-marbles && \
@@ -53,7 +53,7 @@ The generator's code is fairly platform agnostic and can be used on Linux, Windo
 that have proper version of Python installed.
 
 # Unit tests
-All unit tests for the generator are located in `tests` subdirectory. They can be executed from top-level project dir with:
+All unit tests for the generator are located in `tests` sub-directory. They can be executed from top-level project dir with:
 
 	python -m unittest discover tests/
 
@@ -63,7 +63,7 @@ All unit tests for the generator are located in `tests` subdirectory. They can b
 * [Generator options](docs/options.md)
 
 # License
-Available under [MIT license](LICENSE).
+Available under [MIT license](LICENSE.txt).
 
 # Other generators
 

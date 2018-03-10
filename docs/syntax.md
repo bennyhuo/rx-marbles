@@ -13,7 +13,7 @@ Each `source` line begins a definition of an observable lifetime line: a **timel
 
 The most interesting bit is the `+-A->` sequence which represents items emitted in time. 
 
-The sequence consists of ASCII characters having a special meaning for the gnerator. 
+The sequence consists of ASCII characters having a special meaning for the generator. 
 
 * The `+` character is the starting point. Each timeline should have that.
 * The `-` character represents time advance step. 
@@ -38,7 +38,7 @@ The diagram below shows all possible cases:
 
 	marble endings
 	{
-		source foo: +--->		// this one with no spcific end
+		source foo: +--->		// this one with no specific end
 		source bar: +---|		// this one ending with completion
 		source dog: +---#		// this one ending with error
 	}
@@ -48,8 +48,8 @@ Converting to:
 ![multichar.svg](https://bitbucket.org/achary/rx-marbles/raw/master/docs/endings.svg)
 
 	
-# Whitespaces and comments
-Whitespace characters are ignored by the generator and can be freely used to position components within diagram source file, to make it more human-readable and help with further maintenance.
+# White spaces and comments
+White space characters are ignored by the generator and can be freely used to position components within diagram source file, to make it more human-readable and help with further maintenance.
 
 Everything that follows two `//` characters is considered being a comment and is ignored by the generator.
 
@@ -104,7 +104,7 @@ The diagram below uses spaces to keep source diagram tidy.
 	
 # Controlling starting time point
 It is possible to have time lines starting at different time points, with use of `.` characters 
-(also refered here as padding characters), 
+(also referred here as padding characters), 
 where one dot represents one time advance step before timeline begins:
 
 	marble paddings
@@ -119,9 +119,9 @@ where one dot represents one time advance step before timeline begins:
 
 # 2-nd order timelines
 The generator syntax support documenting observables of observables in a way that at specific point in time, 
-new observable timeline are emitted (pointing little down) and produing values on their own independent timelines.
+new observable timeline are emitted (pointing little down) and producing values on their own independent timelines.
 
-The syntax for such scenario changes and couple of emitted 2-nd order timelines needs to be groupped with an extra pair of `{}` brackets around one or more source timelines.
+The syntax for such scenario changes and couple of emitted 2-nd order timelines needs to be grouped with an extra pair of `{}` brackets around one or more source timelines.
 
 Simple example looks like that:
 
@@ -141,13 +141,13 @@ Simple example looks like that:
 Please note that its the time-advance `.` padding character that is used to define when each 
 inner timeline has its starting point on the main timeline.
 
-# Groupped items
-Some reactive operators do emit groupped versions of items collected. 
+# Grouped items
+Some reactive operators do emit grouped versions of items collected. 
 The marbles generator supports such case by using pair of '{}' around individual timeline values.
 
 Example:
 
-	marble groupped
+	marble grouped
 	{
 		source foo:		+-{1,2}-{3,4,5}-{6,7}-|
 	}

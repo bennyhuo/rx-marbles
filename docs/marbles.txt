@@ -18,7 +18,7 @@ marble three
 
 	marble endings
 	{
-		source foo: +--->		// this one with no spcific end
+		source foo: +--->		// this one with no specific end
 		source bar: +---|		// this one ending with completion
 		source dog: +---#		// this one ending with error
 	}
@@ -60,7 +60,7 @@ marble no_confusion
 	}
 	
 	
-	marble groupped
+	marble grouped
 	{
 		source foo:		+-{1,2}-{3,4,5}-{6,7}-|
 	}

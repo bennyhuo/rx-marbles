@@ -1,6 +1,6 @@
 The generator can be run on one of two modes:
 
-* batch mode (defult)
+* batch mode (defaults)
 * single-file mode
 
 ## Batch mode
