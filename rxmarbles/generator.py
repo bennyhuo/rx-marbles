@@ -6,7 +6,7 @@ import argparse
 import math
 import importlib
 
-start_character = Suppress("+")
+start_character = "+"
 nop_event_character = '-'
 completion_symbol = "|"
 error_character = "#"
@@ -14,25 +14,25 @@ infinity_character = ">"
 
 colon = Suppress(":")
 comment_start = "//"
-empty_tick = Word(nop_event_character, exact=1)
+nop_event = Word(nop_event_character, exact=1)
 # our marble can be either single alphanumeric character, or multiple characters surrounded by ()
 marble_text = alphanums
+start_symbol = Suppress(start_character)
 simple_marble = Word(marble_text, exact=1)
 bracked_marble = Suppress("(") + Word(alphanums + "'\"._-") + Suppress(")")
 groupped_marble = Combine("{" + Word(marble_text + ",") + "}")
 marble = Or([simple_marble, bracked_marble , groupped_marble])
 end = Or([completion_symbol, error_character, infinity_character]).setResultsName('end')
-item = Word(alphanums)
 timeline_name = Word(alphanums + ",./<>?;'\"[]\{}|`~!@#$%^&*()-=_+").setResultsName('name')
 source_keyword = "source"
 operator_keyword = "operator"
-tick = Or([empty_tick, marble])
-ticks = Group(ZeroOrMore(tick)).setResultsName('ticks')
+event = Or([nop_event, marble])
+events = Group(ZeroOrMore(event)).setResultsName('events')
 padding = Optional(Word('.')).setResultsName('padding')
-timeline = Group(padding + start_character + ticks + end).setResultsName('timeline', True)
-skewed_group = Suppress("{") + OneOrMore(timeline) + Suppress("}")
+events_sequence = Group(padding + start_symbol + events + end).setResultsName('events_sequence', True)
+skewed_group = Suppress("{") + OneOrMore(events_sequence) + Suppress("}")
 type = Or([source_keyword, operator_keyword]).setResultsName('type')
-source_or_operator = Group(type + timeline_name + colon + Or([timeline, skewed_group]))
+source_or_operator = Group(type + timeline_name + colon + Or([events_sequence, skewed_group]))
 
 marble_diagram_keyword = "marble"
 marble_diagram_body = OneOrMore(source_or_operator)
@@ -46,14 +46,14 @@ class Timeline:
         self.theme = theme
         self.type = parsed_list.type
         self.name = parsed_list.name
-        self.timelines = parsed_list.timeline
+        self.timelines = parsed_list.events_sequence
         self.rotation_deg = 0
         if len(self.timelines) > 1:
             self.rotation_deg = 15
-        max_index = max(map(lambda x: 2 + len(x.ticks) + len(x.padding), self.timelines))
-        # this is used as distance on flat axis between two time ticks
+        max_index = max(map(lambda x: 2 + len(x.events) + len(x.padding), self.timelines))
+        # this is used as distance on flat axis between two time events
         self.base_thick_width = 50.0
-        # this is used as distance on skewed between two time ticks
+        # this is used as distance on skewed between two time events
         self.tick_width = self.base_thick_width / math.cos(self.rotation_deg * math.pi / 180.0)
         
         self.width = self.tick_width * max_index
@@ -71,12 +71,12 @@ class Timeline:
         return groupped_symbol
         
     def __get_timeline_shapes(self, coloring, timeline_items):
-        # adding ticks
+        # adding events
         theme = self.theme
         self.end = timeline_items.end
         x_offset = 0
         global parseString
-        for o in timeline_items.ticks:
+        for o in timeline_items.events:
             if o.startswith('{') and o.endswith('}'):
                 groupped_symbol = self.create_groupped_symbol(o, x_offset, coloring)
                 self.symbols.append(groupped_symbol)
@@ -123,8 +123,8 @@ class Timeline:
         
         # let's calculate all bounding boxes
         max_height = 0
-        for timeline in self.timelines:
-            timeline_width = self.base_thick_width * (1 + len(timeline.ticks))
+        for events_sequence in self.timelines:
+            timeline_width = self.base_thick_width * (1 + len(events_sequence.events))
             timeline_height = self.total_height
             bb = (timeline_width, timeline_height)
             # width of the diagonal
@@ -166,7 +166,7 @@ class Operator:
         return svg
 
 # ---------------------------------------------------
-# timeline elements
+# events_sequence elements
 # ---------------------------------------------------
 
 def get_objects(parse_result, theme):

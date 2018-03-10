@@ -70,9 +70,9 @@ class SingleMarbleSingleSourceWithOneNopCase(unittest.TestCase):
     def test_first_marbles_timeline_has_only_one_nop_element(self):
         diagram = self.result[0]
         timeline = diagram[1]
-        ticks = timeline[2].ticks
-        self.assertEqual(1, len(ticks))
-        self.assertEqual('-', ticks[0])
+        events = timeline[2].events
+        self.assertEqual(1, len(events))
+        self.assertEqual('-', events[0])
         
 class SingleMarbleWithOneSourceAndOneOperatorWithOneNopCase(unittest.TestCase):
     def setUp(self):
@@ -154,5 +154,4 @@ class MarblesWithSpecialCharactersCase(unittest.TestCase):
         diagram = result[0]
         timeline = diagram[1]
         events = timeline[2][0]
-        print(timeline)
         self.assertEqual("""abcABC123_-'".""", events[2])

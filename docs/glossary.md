@@ -29,9 +29,7 @@ Each timeline also has to contain an `events sequence`, for example:
 
 	+-1--2---|
 	
-Each events sequence has to start with start symbol (`+`) optionally prepended by a number of `padding` characters (`.`), and is followed with one or many `events`.
-
-
+Each events sequence has to start with start symbol (`+`) optionally prepended by a number of `padding` characters (`.`), and is followed with one or many `events` sybols, like `-` or alphanumeric character representing a `marble`.
 
 Eventually, each events sequence has to terminate with one of `completion` symbols:
 
