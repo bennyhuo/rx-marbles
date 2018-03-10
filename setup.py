@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(name='rxmarbles',
-      version='0.1',
+      version='0.2',
       description='Marbles diagram generator',
       url='https://bitbucket.org/achary/rx-marbles/',
       author='Adam Charytoniuk',
