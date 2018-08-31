@@ -23,7 +23,7 @@ bracked_marble = Suppress("(") + Word(alphanums + "'\"._-") + Suppress(")")
 groupped_marble = Combine("{" + Word(marble_text + ",") + "}")
 marble = Or([simple_marble, bracked_marble , groupped_marble])
 end = Or([completion_symbol, error_character, infinity_character]).setResultsName('end')
-timeline_name = Word(alphanums + ",./<>?;'\"[]\{}|`~!@#$%^&*()-=_+").setResultsName('name')
+timeline_name = Or([QuotedString(quoteChar='"'), Word(alphanums + ",./<>?;'\"[]\{}|`~!@#$%^&*()-=_+")]).setResultsName('name')
 source_keyword = "source"
 operator_keyword = "operator"
 event = Or([nop_event, marble])

@@ -111,9 +111,9 @@ class MutlipleMarblesWithAllFeatures(unittest.TestCase):
             }
             marble C
             {
-                source C1: +---1    --|
+                source \"Quoted source with spaces\": +---1    --|
                 source C2: +---{ABC}--|
-                operator C3: 
+                operator \"Quoted operator with spaces\": 
                 {
                     +--1-2-34     -4-|
                     ..+--1-2- 34  -4-|
@@ -135,6 +135,15 @@ class MarblesWithSpecialCharactersCase(unittest.TestCase):
         result = marble_diagrams.parseString(input)
         self.assertEqual("""abcABC123_<>?,./;'"[]\{}|`'~!@#$%^&*()_+-=""", result[0][1].name)
 
+    def test_when_diagram_has_quoted_string_in_source_label____unquoted_label_is_provided_in_object_model(self):
+        input = """marble A 
+            {
+                source \"This is quoted and has spaces\": +-|
+            }
+        """
+        result = marble_diagrams.parseString(input)
+        self.assertEqual("This is quoted and has spaces", result[0][1].name)
+
     def test_when_diagram_has_special_characters_in_operator_label____same_label_is_provided_in_object_model(self):
         input = """marble A 
             {
@@ -143,6 +152,15 @@ class MarblesWithSpecialCharactersCase(unittest.TestCase):
         """
         result = marble_diagrams.parseString(input)
         self.assertEqual("""abcABC123_<>?,./;'"[]\{}|`'~!@#$%^&*()_+-=""", result[0][1].name)
+
+    def test_when_diagram_has_quoted_string_in_operator_label____unquoted_label_is_provided_in_object_model(self):
+        input = """marble A 
+            {
+                operator \"This is quoted and has spaces\": +-|
+            }
+        """
+        result = marble_diagrams.parseString(input)
+        self.assertEqual("This is quoted and has spaces", result[0][1].name)
 
     def test_when_diagram_has_special_characters_in_marble_text____same_label_is_provided_in_object_model(self):
         input = """marble A
