@@ -11,6 +11,19 @@ pipelines:
         name: Unit testing
         caches:
           - pip
-        script: # Modify the commands below to build your repository.
+        script:
           - pip install pyparsing argparse
           - python -m unittest discover tests/
+  branches:
+    master:
+    - step:
+        name: Unit testing
+        caches:
+          - pip
+        script:
+          - pip install pyparsing argparse
+          - python -m unittest discover tests/
+    - step:
+        name: Deploying to PyPI
+        script:
+          - bash -e deploy.bash 
