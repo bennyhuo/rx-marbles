@@ -6,5 +6,5 @@
  username=${PYPI_USERNAME}
  password=${PYPI_PASSWORD}
  EOF
- python3 setup.py sdist upload;
+
  

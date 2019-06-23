@@ -27,3 +27,4 @@ pipelines:
         name: Deploying to PyPI
         script:
           - bash -e deploy.bash 
+          - python3 setup.py sdist upload
