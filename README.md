@@ -15,18 +15,16 @@ This is yet another marble diagram generator for documenting Reactive Extensions
 * generation multiple diagram images from a single file (batch mode)
 
 # Installation
-The one-liner installation on Linux (to local user home directory)  is: 
+The recommended installation is to get it installed from PyPI repository: 
 
-	git clone https://achary@bitbucket.org/achary/rx-marbles.git && \
-	cd rx-marbles && \
-	pip install --user .
+	pip3 install rxmarbles
 
 The `marblesgen` executable will become available from the command prompt.
 
 # Running without installation
 You can run the generator without installation, from the source code tree, e.g:
 
-	python -m rxmarbles --help
+	python3 -m rxmarbles --help
 
 # Example
 
@@ -55,7 +53,7 @@ that have proper version of Python installed.
 # Unit tests
 All unit tests for the generator are located in `tests` sub-directory. They can be executed from top-level project dir with:
 
-	python -m unittest discover tests/
+	python3 -m unittest discover tests/
 
 # Details
 
