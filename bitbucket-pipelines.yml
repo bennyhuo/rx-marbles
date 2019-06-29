@@ -25,6 +25,7 @@ pipelines:
           - python -m unittest discover tests/
     - step:
         name: Deploying to PyPI
+        deployment: production
         script:
           - pip3 install twine
           - bash -e deploy.bash 
