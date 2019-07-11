@@ -21,6 +21,9 @@ The recommended installation is to get it installed from PyPI repository:
 
 The `marblesgen` executable will become available from the command prompt.
 
+# Trying live online
+The rxmarbles generator is available online for play at https://rx-marbles-online.herokuapp.com/.
+
 # Running without installation
 You can run the generator without installation, from the source code tree, e.g:
 
