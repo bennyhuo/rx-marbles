@@ -5,6 +5,8 @@ import sys
 import argparse
 import math
 import importlib
+import html
+import hashlib
 
 start_character = "+"
 nop_event_character = '-'
@@ -40,6 +42,9 @@ marble_diagram_name = Word(alphanums + "_").setResultsName("diagram_name")
 marble_diagram = Group(Suppress(marble_diagram_keyword) + marble_diagram_name + Suppress("{") + marble_diagram_body + Suppress("}"))
 marble_diagrams = OneOrMore(marble_diagram)
 marble_diagrams.ignore(comment_start + restOfLine)
+
+def create_id_string(name):
+    return hashlib.md5(name.encode("utf-8")).hexdigest()
 
 class Timeline:
     def __init__(self, parsed_list, theme):
@@ -100,7 +105,7 @@ class Timeline:
             self.symbols = []
             self.__get_timeline_shapes(coloring, timeline_items)
             x_offset = self.base_thick_width * len(timeline_items.padding)
-            g_id = self.type + "_" + self.name
+            g_id = self.type + "_" + create_id_string(self.name)
             rot_yy = yy
             svg += '<g id="%s" transform="rotate(%s %s %s) translate(%s,%s)">' % (g_id, self.rotation_deg, x_offset, rot_yy , x_offset, yy)
             for obj in self.symbols:
@@ -159,7 +164,7 @@ class Operator:
     def get_svg(self, y, coloring, max_length):
         theme = self.theme
         box_y = y + self.top_margin
-        box = OperatorBox(theme, max_length, self.box_height, self.name)
+        box = OperatorBox(theme, max_length, self.box_height, html.escape(self.name))
         svg = '<g transform="translate(0 %s)">' % box_y
         svg += box.get_shape() + self.timeline.get_svg(0 + self.box_height + self.top_margin, coloring, max_length)
         svg += '</g>'
