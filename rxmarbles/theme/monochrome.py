@@ -83,7 +83,7 @@ circ = '''
   <text
      y="%s"
      x="%s"
-     style="font-size:20px;font-family:"JetBrains Mono";text-align:center;text-anchor:middle;fill:#000000;"
+     style="font-size:20px;font-family:JetBrains Mono;text-align:center;text-anchor:middle;fill:#000000;"
      xml:space="preserve">%s</text>
 </g>
 '''
@@ -126,7 +126,7 @@ block = '''
       <text
          x="%s"
          y="%s"
-         style="font-size:22px;font-family:"JetBrains Mono";text-align:center;text-anchor:middle;fill:#000000;"
+         style="font-size:22px;font-family:JetBrains Mono;text-align:center;text-anchor:middle;fill:#000000;"
          xml:space="preserve">%s</text>
     </g>
 '''
